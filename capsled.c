@@ -8,6 +8,8 @@
 # define INPUT_DEVICE "/dev/input/event3"
 #elif defined TARGET_DEBIAN
 # define INPUT_DEVICE "/dev/input/event0"
+#elif defined TARGET_ARCH
+# define INPUT_DEVICE "/dev/input/event4"
 #else
 # define INPUT_DEVICE "/dev/input/event0"
 #endif
