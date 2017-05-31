@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <linux/input.h>
 #include <fcntl.h>
+#include <string.h>
 
 #ifdef TARGET_UBUNTU
 # define INPUT_DEVICE "/dev/input/event3"
@@ -77,8 +78,14 @@ int main (int argc, char *argv[]) {
             }
             else {
                 capslock = True;
-                // turn off the LED
-                fprintf(ledfd, "0 off");
+                // turn off / blink the LED 
+                if(argc>1){
+                    if(strcmp(argv[1], "-b") || strcmp(argv[1], "--blink")){
+                        fprintf(ledfd, "0 blink");
+                    }
+                }
+                else
+                    fprintf(ledfd, "0 off");
                 fflush(ledfd);
             }
         }
