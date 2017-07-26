@@ -18,3 +18,6 @@ all: capsled.c
 
 clean:
 	rm -f capsled
+install: all
+	install -m 0755 capsled $(DESTDIR)$(PREFIX)/bin/
+	if test -x /usr/bin/systemctl && test -d "/etc/systemd/system"; then install -m0644 capsled.service /etc/systemd/system/capsled.service && systemctl daemon-reload && systemctl start capsled.service && systemctl enable capsled.service; fi
